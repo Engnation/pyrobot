@@ -2,7 +2,7 @@
     <arg name="use_camera" default="false"/>
     <arg name="use_arm" default="false"/>
     <arg name="use_vslam" default="false"/>
-    <arg name="use_base" default="false"/>
+    <arg name="use_base" default="true"/>
     <arg name="torque_control" default="false"/>
     <arg name="use_sim" default="true"/>
     <arg name="teleop" default="false"/>
