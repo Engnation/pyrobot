@@ -1,5 +1,12 @@
 <launch>  
   <arg name="base"/>
+  <!-- Robot pose -->
+  <arg name="x" default="-2"/>
+  <arg name="y" default="2"/>
+  <arg name="z" default="1"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="0"/>
 
   <!-- Static transform to make camera work in sim -->
   <node pkg="tf" type="static_transform_publisher" name="cam_transform" args="0 0 0 0 0 0 /camera_link /camera_color_optical_frame 100" />
@@ -11,6 +18,7 @@
     <arg name="recording" value="false"/>
     <arg name="debug" value="false"/>
     <arg name="base" value="$(arg base)"/>
+    <arg name="world_name" value="$(find living_room_sim_1)/worlds/my_world.world"/>
   </include>
 
   <rosparam file="$(find locobot_gazebo)/config/robotic_arm_gazebo_joint_states.yaml" command="load"/>
@@ -23,7 +31,8 @@
     </include>
 
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
-          args="-file $(find locobot_description)/urdf/locobot_lite_description.urdf -urdf -z 0.05 -model locobot" />
+          args="-file $(find locobot_description)/urdf/locobot_lite_description.urdf -urdf -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -model locobot" />
+          <!-- args="-file $(find locobot_description)/urdf/locobot_lite_description.urdf -param robot_description -urdf -model locobot_description -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)" /> -->
   </group>
 
   <group if="$(eval base =='kobuki')">
