@@ -25,7 +25,7 @@ const siteConfig = {
   tagline: 'An Open Source Robotics Research Platform',
   // url: 'https://pyrobot-v1-website.netlify.com', // Your website URL
   // baseUrl: '/', // Base URL for your project */
-  url: 'https://www.pyrobot.org', // Your website URL
+  url: 'https://pyrobot.org', // Your website URL
   // url: 'https://pyrobot-v1-website.netlify.com', // Your website URL
   // baseUrl: '/', // Base URL for your project */
   baseUrl: '/', // Base URL for your project */
@@ -35,6 +35,7 @@ const siteConfig = {
 
   // Used for publishing and more
   // projectName: 'pyrobot',
+  cname: 'pyrobot.org',
   projectName: 'pyrobot',
   organizationName: 'facebookresearch',
   // organizationName: 'facebook',
@@ -48,7 +49,9 @@ const siteConfig = {
     {href: 'https://pyrobot-docs.readthedocs.io/en/latest/#', label: 'API'},
     {doc: 'datasets', label: 'Datasets'},
     {doc: 'faq', label: 'Help'},
-    {href: 'https://github.com/facebookresearch/pyrobot', label: 'GitHub'}
+    {href: 'https://github.com/facebookresearch/pyrobot', label: 'GitHub'},
+    {href: 'https://pyrobot-next.readthedocs.io/en/api_0.4/', label: 'next-API'},
+    {href: 'https://github.com/facebookresearch/pyrobot/tree/API_0.4', label: 'next-Github'}
     // {blog: true, label: 'Blog'}
   ],
 
