@@ -18,6 +18,7 @@
     <arg name="recording" value="false"/>
     <arg name="debug" value="false"/>
     <arg name="base" value="$(arg base)"/>
+    <arg name="verbose" value="true"/>
     <arg name="world_name" value="$(find living_room_sim_1)/worlds/my_world.world"/>
   </include>
 
