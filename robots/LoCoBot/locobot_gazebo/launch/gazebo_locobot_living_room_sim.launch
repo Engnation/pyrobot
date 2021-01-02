@@ -44,7 +44,8 @@
     </include>
 
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
-          args="-file $(find locobot_description)/urdf/locobot_description.urdf -urdf -z 4.05 -model locobot" >
+          args="-file $(find locobot_description)/urdf/locobot_lite_description.urdf -urdf -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -model locobot" />
+          <!--args="-file $(find locobot_description)/urdf/locobot_description.urdf -urdf -z 4.05 -model locobot" >-->
     </node>
 
     <!-- Velocity muxer -->
