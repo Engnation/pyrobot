@@ -5,17 +5,15 @@
 <remap from="/arm_camera/image_raw" to="/camera/color/image_raw"/>
 <remap from="create_controller/cmd_vel" to="/cmd_vel"/> 
 
-
-<include file="$(find locobot_gazebo)/launch/gazebo_locobot.launch">
+<!--<include file="$(find locobot_gazebo)/launch/gazebo_locobot.launch">-->
+<include file="$(find locobot_gazebo)/launch/gazebo_locobot_living_room_sim.launch">
     <arg name="base" value="create"/> <!-- pass 'create' value to arg 'base' for gazebo_locobot.launch-->
 </include>
-
 
 <include file="$(find locobot_gazebo)/launch/gazebo_locobot_control.launch"/>
 
 <node name="locobot_gazebo" pkg="locobot_gazebo" type="locobot_gazebo" respawn="true" output="screen" />
 
 <include file="$(find locobot_moveit_config)/launch/demo.launch"/>
-
 
 </launch>
