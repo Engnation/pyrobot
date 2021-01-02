@@ -65,7 +65,8 @@
     <!-- Gazebo -->
     <group if="$(arg use_sim)">
         
-        <include file="$(find locobot_gazebo)/launch/gazebo_locobot.launch">
+        <!--<include file="$(find locobot_gazebo)/launch/gazebo_locobot.launch">-->
+	<include file="$(find locobot_gazebo)/launch/gazebo_locobot_living_room_sim.launch">
             <arg name="base" value="$(arg base)"/>
         </include>
 
