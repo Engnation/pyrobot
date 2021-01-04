@@ -7,7 +7,8 @@
 
 <!--<include file="$(find locobot_gazebo)/launch/gazebo_locobot.launch">-->
 <include file="$(find locobot_gazebo)/launch/gazebo_locobot_living_room_sim.launch">
-    <arg name="base" value="create"/> <!-- pass 'create' value to arg 'base' for gazebo_locobot.launch-->
+    <!--<arg name="base" value="create"/> --><!-- pass 'create' value to arg 'base' for gazebo_locobot.launch-->
+    <arg name="base" value="kobuki"/> <!-- pass 'kobuki' value to arg 'base' for gazebo_locobot.launch-->
 </include>
 
 
