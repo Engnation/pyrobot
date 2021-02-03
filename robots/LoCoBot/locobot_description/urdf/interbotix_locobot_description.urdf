@@ -462,7 +462,9 @@
                 <mesh filename="package://locobot_description/meshes/finger_r.STL"/>
             </geometry>
             <material name="">
-                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+                <!--changed color to see if changes to this urdf are taking effect. Color change only seems to be visible in RVIZ not gazebo-->
+                <!--<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>-->
+                <color rgba="140 114 114 1"/>
             </material>
         </visual>
         <collision>
@@ -477,7 +479,7 @@
         <parent link="gripper_link"/>
         <child link="finger_r"/>
         <axis xyz="0 1 0"/>
-        <limit effort="1" lower="-1" upper="0" velocity="1"/>
+        <limit effort="100" lower="-0.033" upper="0" velocity="50"/>
     </joint>
     <link name="finger_l">
         <inertial>
@@ -506,7 +508,7 @@
         <parent link="gripper_link"/>
         <child link="finger_l"/>
         <axis xyz="0 1 0"/>
-        <limit effort="1" lower="0" upper="1" velocity="1"/>
+        <limit effort="100" lower="0" upper="0.033" velocity="50"/>
     </joint>
     <link name="ar_tag">
         <inertial>
@@ -824,6 +826,41 @@
         <maxVel>1.0</maxVel>
     </gazebo>
 
+    <!--attempt to fix gripper lack of friction-->
+    <gazebo reference="finger_r">
+        <mu1>1000</mu1>
+        <mu2>1000</mu2>
+        <kp>1000000.0</kp>
+        <kd>100000.0</kd>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+        <minDepth>0.001</minDepth>
+        <maxVel>0</maxVel>
+        <torsional>
+            <ode>
+                <coefficient>1000</coefficient>
+                <slip>0</slip>
+            </ode>
+        </torsional>
+
+    </gazebo>
+
+    <gazebo reference="finger_l">
+        <mu1>1000</mu1>
+        <mu2>1000</mu2>
+        <kp>1000000.0</kp>
+        <kd>100000.0</kd>
+        <slip1>0</slip1>
+        <slip2>0</slip2>
+        <minDepth>0.001</minDepth>
+        <maxVel>0</maxVel>
+        <torsional>
+            <ode>
+                <coefficient>1000</coefficient>
+                <slip>0</slip>
+            </ode>
+        </torsional>
+    </gazebo>
 
     <gazebo reference="cliff_sensor_left_link">
         <sensor name="cliff_sensor_left" type="ray">
