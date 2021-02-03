@@ -69,7 +69,8 @@
 	<include file="$(find locobot_gazebo)/launch/gazebo_locobot_living_room_sim.launch">
             <arg name="base" value="$(arg base)"/>
         </include>
-
+	<!--modified gazebo controller launcher-->
+	<!--<include file="$(find locobot_gazebo)/launch/gazebo_locobot_position_and_effort_control.launch"/>-->
         <include file="$(find locobot_gazebo)/launch/gazebo_locobot_control.launch"/>
         <node name="locobot_gazebo" pkg="locobot_gazebo" type="locobot_gazebo" 
             respawn="true" output="screen"/> 
