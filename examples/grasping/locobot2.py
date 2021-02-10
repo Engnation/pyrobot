@@ -115,13 +115,15 @@ class Grasper(object):
             cur_depth = self.robot.camera.get_depth()
             
             np.savetxt("depth.csv", cur_depth, delimiter=",")
-            
-            plt.figure()
+            #print(type(cur_depth))
+            #print(cur_depth.shape)
 
-            p = plt.imshow(cur_depth)
-            plt.colorbar(p)
+            #plt.figure()
 
-            plt.show()
+            #p = plt.imshow(cur_depth)
+            #plt.colorbar(p)
+
+            #plt.show()
 
         cur_depth = cur_depth * 1000.0  # conversion from mm to m
         cur_depth[cur_depth > MAX_DEPTH] = 0.0
@@ -191,7 +193,8 @@ class Grasper(object):
         base_pt = self._convert_frames(temp_p)
         return base_pt
 
-    def compute_grasp(self, dims=[(240, 480), (100, 540)], display_grasp=False):
+    #def compute_grasp(self, dims=[(240, 480), (100, 540)], display_grasp=False):
+    def compute_grasp(self, dims=[(240, 480), (100, 640)], display_grasp=True):
         """ 
         Runs the grasp model to generate the best predicted grasp.
         
@@ -216,8 +219,25 @@ class Grasper(object):
         selected_grasp[2] = selected_grasp[2]
         if display_grasp:
             self.grasp_model.display_predicted_image()
-            # im_name = '{}.png'.format(time.time())
-            # cv2.imwrite('~/Desktop/grasp_images/{}'.format(im_name), self.grasp_model._disp_I)
+            #'''
+            print("Attempting to save grasping model image")
+            im_name = '{}.png'.format(time.time())
+            cv2.imwrite('~/Desktop/grasp_images/{}'.format(im_name), self.grasp_model._disp_I)
+            #'''
+
+            #plt.figure()
+
+            #p2 = plt.imshow(self.grasp_model._disp_I)
+            #plt.colorbar(p2)
+
+            #plt.show()
+            print("this is the selected grasp: ",selected_grasp)
+
+        grasp_offset_x = 1
+
+
+        selected_grasp[2] = selected_grasp[2] + grasp_offset_x
+
         return selected_grasp
 
     def grasp(self, grasp_pose):
