@@ -191,10 +191,11 @@ class Grasper(object):
         temp_p = self._get_3D_camera(pt, z_norm)
         rospy.loginfo("temp_p: {}".format(temp_p))
         base_pt = self._convert_frames(temp_p)
+        print("base_pt: ",base_pt)
         return base_pt
 
-    #def compute_grasp(self, dims=[(240, 480), (100, 540)], display_grasp=False):
-    def compute_grasp(self, dims=[(240, 480), (100, 640)], display_grasp=True):
+    def compute_grasp(self, dims=[(240, 480), (100, 540)], display_grasp=False):
+    #def compute_grasp(self, dims=[(0, 480), (0, 640)], display_grasp=True):
         """ 
         Runs the grasp model to generate the best predicted grasp.
         
@@ -209,21 +210,35 @@ class Grasper(object):
 
         img = self.robot.camera.get_rgb()
         img = img[dims[0][0] : dims[0][1], dims[1][0] : dims[1][1]]
-        # selected_grasp = [183, 221, -1.5707963267948966, 1.0422693]
+        
+        
+        #selected_grasp = [183, 221, -1.5707963267948966, 1.0422693]
+        #For debugging, use pre-defined selected_grasp instead of model predicted
+        #note: format:  = [x, y, rotation 1? , rotation2?] (where x and y correspond to the display grasp image)
+        #selected_grasp = [0.3853023108656047, 0.15896290708401667, -0.6981317007977318, 1.0202605]
+
         selected_grasp = list(self.grasp_model.predict(img))
+        print("selected grasp initial: ",selected_grasp)
         rospy.loginfo("Pixel grasp: {}".format(selected_grasp))
         img_grasp = copy.deepcopy(selected_grasp)
         selected_grasp[0] += dims[0][0]
+        print("selected grasp dims 1 ",selected_grasp)
         selected_grasp[1] += dims[1][0]
-        selected_grasp[:2] = self.get_3D(selected_grasp[:2])[:2]
+        print("selected grasp dims 2 ",selected_grasp)
+        base_point = self.get_3D(selected_grasp[:2])[:2]
+        print("base_point: ",base_point)
+        selected_grasp[:2] = base_point
+
+        #selected_grasp[:2] = self.get_3D(selected_grasp[:2])[:2]
+        print("selected grasp after get 3D: ", selected_grasp)
         selected_grasp[2] = selected_grasp[2]
         if display_grasp:
             self.grasp_model.display_predicted_image()
-            #'''
+            '''
             print("Attempting to save grasping model image")
             im_name = '{}.png'.format(time.time())
             cv2.imwrite('~/Desktop/grasp_images/{}'.format(im_name), self.grasp_model._disp_I)
-            #'''
+            '''
 
             #plt.figure()
 
@@ -233,7 +248,7 @@ class Grasper(object):
             #plt.show()
             print("this is the selected grasp: ",selected_grasp)
 
-        grasp_offset_x = 1
+        grasp_offset_x = 0
 
 
         selected_grasp[2] = selected_grasp[2] + grasp_offset_x
