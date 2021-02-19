@@ -654,6 +654,40 @@
         <child link="camera_link"/>
         <axis xyz="0 0 0"/>
     </joint>
+
+
+    <!-- Dummy link and joint to resolve point cloud orientation issue-->
+    <joint name="kinect_optical_joint" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz="0.0 0.0 0.0" rpy="-1.57 0 -1.57"/>
+      <parent link="camera_link"/>
+      <child link="kinect_optical_link"/>
+    </joint>
+    <!-- Dummy Link -->
+    <link name="kinect_optical_link">
+        <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <box size="0.02 0.02 0.02"/>
+        </geometry>
+        </collision>
+
+        <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <box size="0.1 0.1 0.1"/>
+        </geometry>
+        <material name="red"/>
+        </visual>
+
+        <inertial>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+        </inertial>
+    </link>
+
+
     <!-- Gazebo Plugins -->
     <gazebo>
         <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
@@ -770,7 +804,9 @@
                 <depthImageTopicName>aligned_depth_to_color/image_raw</depthImageTopicName>
                 <depthImageCameraInfoTopicName>aligned_depth_to_color/camera_info</depthImageCameraInfoTopicName>
                 <pointCloudTopicName>depth_registered/points</pointCloudTopicName>
-                <frameName>camera_color_optical_frame</frameName>
+                <!--<frameName>camera_color_optical_frame</frameName>-->
+                <!--changed to kinect_optical_link to incorporate fix for point cloud orientation-->
+                <frameName>kinect_optical_link</frameName>
                 <pointCloudCutoff>0</pointCloudCutoff>
                 <pointCloudCutoffMax>10.0</pointCloudCutoffMax>
                 <distortionK1>0.00000001</distortionK1>
