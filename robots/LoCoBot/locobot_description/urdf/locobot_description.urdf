@@ -665,20 +665,20 @@
     </joint>
     <!-- Dummy Link -->
     <link name="kinect_optical_link">
-        <collision>
+        <!--<collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-            <box size="0.02 0.02 0.02"/>
+            <box size="0.0002 0.0002 0.0002"/>
         </geometry>
-        </collision>
+        </collision>-->
 
-        <visual>
+        <!--<visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-            <box size="0.1 0.1 0.1"/>
+            <box size="0.0002 0.0002 0.0002"/>
         </geometry>
         <material name="red"/>
-        </visual>
+        </visual>-->
 
         <inertial>
         <mass value="1e-5" />
